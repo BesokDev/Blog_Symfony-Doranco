@@ -87,7 +87,7 @@ class ArticleController extends AbstractController
 
                         /* On appelle la méthode move() de UploadedFile pour pouvoir déplacer le fichier
                             dans son dossier de destination.
-                                Le dossier de destination a été parametré dans services.yaml
+                                Le dossier de destination a été paramétré dans services.yaml
 
                         /!\ ATTENTION :
                                 La méthode move() lance une erreur de type FileException.
