@@ -32,24 +32,22 @@ class ArticleController extends AbstractController
      */
     public function createArticle(Request $request, SluggerInterface $slugger): Response
     {
+        /** @var Article $article */
         $article = new Article();
+
         $form = $this->createForm(ArticleType::class, $article);
         $form->handleRequest($request);
 
-        
         if($form->isSubmitted() && $form->isValid()){
 
             $article = $form->getData();
 
-            # Association de l'article au user : setOwner()
-            //
-
-            # Association de l'article à la category : setOwner()
-            //
-
             $article->setCreatedAt(new \DateTime());
 
-            # Coder ici la logique pour uploader la photo
+            # Association de l'article au user : setAuthor()
+            $article->setAuthor($this->getUser());
+
+            # Coder ici la logique pour uploader la photo :
 
             // On récupère le fichier du formulaire grâce à getData(). Cela nous retourne un objet de type UploadedFile.
             /** @var UploadedFile $file */
