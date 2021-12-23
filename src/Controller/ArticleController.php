@@ -4,8 +4,11 @@ namespace App\Controller;
 
 
 use App\Entity\Article;
+use App\Entity\Commentary;
 use App\Form\ArticleType;
+use App\Form\CommentaryType;
 use App\Form\EditArticleType;
+use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
@@ -157,9 +160,11 @@ class ArticleController extends AbstractController
     public function showArticle(Article $singleArticle): Response
     {
         $article = $this->entityManager->getRepository(Article::class)->find($singleArticle->getId());
+        $commentaries = $this->entityManager->getRepository(Commentary::class)->findBy( [ 'article' => $singleArticle->getId()]);
 
         return $this->render('article/show_article.html.twig', [
-            'article' => $article
+            'article' => $article,
+            'commentaries' => $commentaries
         ]);
     }
 
